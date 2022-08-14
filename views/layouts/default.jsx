@@ -17,6 +17,7 @@ function Default(html) {
         />
         <link rel="stylesheet" href="/main.css" 
         />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
       </head>
       <body>
         <div className="wrapper">
