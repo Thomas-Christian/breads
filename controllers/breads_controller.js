@@ -30,6 +30,8 @@ breads.post('/', (req, res) => {
   }
   Bread.create(req.body)
   res.redirect('/breads')
+
+  .catch(res.send("<html> <p> Bread Error </p> </html>"))
 })
 
 // EDIT
@@ -46,11 +48,14 @@ breads.get('/:id/edit', (req, res) => {
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
       .then(foundBread => {
-          res.render('show', {
-              bread: foundBread
-          })
+        const bakedBy = foundBread.getBakedBy() 
+        console.log(bakedBy)
+        res.render('show', {
+            bread: foundBread
+        })
       })
-})
+    })
+
 
 // DELETE
 breads.delete('/:id', (req, res) => {
@@ -73,6 +78,5 @@ breads.put('/:id', (req, res) => {
       res.redirect(`/breads/${req.params.id}`) 
     })
 })
-
 
 module.exports = breads
