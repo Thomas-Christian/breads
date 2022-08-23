@@ -1,49 +1,40 @@
-const React = require('react')
-const Default = require('./layouts/Default')
+const React = require("react");
+const Default = require("./layouts/Default");
 
-function New() {
+function New({bakers}) {
   return (
     <Default>
       <div className="backButton">
-        <a href="/breads"><button>Go back to the index</button></a>
+        <a href="/breads">
+          <button>Go back to the index</button>
+        </a>
       </div>
 
       <h2>Add a new bread</h2>
       <form action="/breads" method="POST">
         <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          required
-        />
+        <input type="text" name="name" id="name" required />
         <label htmlFor="image">Image</label>
-        <input
-          type="text"
-          name="image"
-          id="image" />
+        <input type="text" name="image" id="image" />
         <label htmlFor="hasGluten">Has Gluten?</label>
-        <input
-          type="checkbox"
-          name="hasGluten"
-          id="hasGluten"
-          defaultChecked
-        />
+        <input type="checkbox" name="hasGluten" id="hasGluten" defaultChecked />
         <br />
         <label htmlFor="baker">Baker</label>
         <select name="baker" id="baker">
-          <option value="Rachel">Rachel</option>
-          <option value="Monica">Monica</option>
-          <option value="Joey">Joey</option>
-          <option value="Chandler">Chandler</option>
-          <option value="Ross">Ross</option>
-          <option value="Phoebe">Phoebe</option>
+          {bakers.map((baker) => {
+            return (
+              <option value={baker.id} key={baker.id}>
+                {" "}
+                {baker.name}
+              </option>
+            );
+          })}
         </select>
 
         <input type="submit" />
       </form>
     </Default>
-  )
+  );
 }
 
-module.exports = New
+module.exports = New;
