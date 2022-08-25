@@ -2,20 +2,18 @@ const express = require("express");
 const breads = express.Router();
 const Bread = require("../models/bread.js");
 const Baker = require("../models/baker.js");
-const breadSeedData = require("../models/bread_seed");
 
 // INDEX
-breads.get("/", (req, res) => {
-  Baker.find().then((foundBakers) => {
-    Bread.find().then((foundBreads) => {
+breads.get("/", async (req, res) => {
+  const foundBakers = await Baker.find().lean()
+  const foundBreads = await Bread.find().limit(10).lean()
       res.render("index", {
         breads: foundBreads,
         bakers: foundBakers,
         title: "Index Page",
       });
     });
-  });
-});
+
 
 // NEW
 breads.get("/new", (req, res) => {
