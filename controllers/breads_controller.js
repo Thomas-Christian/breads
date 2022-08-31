@@ -56,7 +56,7 @@ breads.get("/:id", (req, res) => {
     .populate("baker")
     .then((foundBread) => {
       res.render("show", {
-        bread: foundBread,
+        bread: foundBread
       });
     })
     .catch((err) => {
